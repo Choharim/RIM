@@ -5,7 +5,7 @@ export const frame = style([
   {
     width: '100%',
     height: '100%',
-    maxWidth: DEVICE_BREAK_POINT.pc,
+    maxWidth: DEVICE_BREAK_POINT.tablet,
     margin: '0 auto',
     paddingLeft: 20,
     paddingRight: 20,

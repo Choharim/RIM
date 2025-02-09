@@ -3,12 +3,12 @@ import { PostCategory } from '@/entity/post/type'
 import Chip from '@/components/Chip'
 import AppFeature from '@/feature/application'
 import Link from 'next/link'
-import * as styles from './categoryChip.css'
+import * as styles from './categoryLabel.css'
 import { ComponentProps } from 'react'
-interface Props extends Pick<ComponentProps<typeof Chip>, 'size' | 'variety'> {
+interface Props extends Pick<ComponentProps<typeof Chip>, 'size'> {
   children: PostCategory
 }
-const CategoryChip = ({ children: category, size, variety }: Props) => {
+const CategoryLabel = ({ children: category, size }: Props) => {
   return (
     <Link
       href={AppFeature.getAppURI({
@@ -17,11 +17,11 @@ const CategoryChip = ({ children: category, size, variety }: Props) => {
       })}
       className={styles.link}
     >
-      <Chip color="primary" size={size} variety={variety}>
+      <Chip color="primary" size={size} variety={'soft'}>
         {PostFeature.getCategoryName(category)}
       </Chip>
     </Link>
   )
 }
 
-export default CategoryChip
+export default CategoryLabel

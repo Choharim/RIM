@@ -9,9 +9,9 @@ import React, {
 import PostFeature from '../..'
 
 import { Either } from '@/shared/_types'
-import _Chip from '@/components/Chip'
+import Chip from '@/components/Chip'
 
-import * as style from '../categoryFilterChip.css'
+import * as style from './categoryFilterChip.css'
 import { combineClassName } from '@/styles/mixin'
 import Link from 'next/link'
 import AppFeature from '@/feature/application'
@@ -21,13 +21,13 @@ export type Theme = {
 }
 
 type Props = Omit<
-  ComponentPropsWithoutRef<typeof _Chip>,
+  ComponentPropsWithoutRef<typeof Chip>,
   'children' | 'color' | 'size' | 'variety'
 > &
   Theme &
   Either<{ category: PostCategory }, { children: ReactNode }>
 
-const Chip = (
+const CategoryFilterChip = (
   { children, category, isSeleted, className, ...props }: Props,
   forwardedRef: ForwardedRef<HTMLSpanElement>
 ) => {
@@ -44,21 +44,21 @@ const Chip = (
               name: 'category',
               pathParams: { category },
             })
-          : AppFeature.getAppURI({ name: 'categoryMain' })
+          : AppFeature.getAppURI({ name: 'main' })
       }
       className={_className}
     >
-      <_Chip
+      <Chip
         {...props}
         size="l"
         color="primary"
-        variety={isSeleted ? 'solid' : 'soft'}
+        variety={isSeleted ? 'solid' : 'surface'}
         ref={forwardedRef}
       >
         {category ? PostFeature.getCategoryName(category) : children}
-      </_Chip>
+      </Chip>
     </Link>
   )
 }
 
-export default forwardRef(Chip)
+export default forwardRef(CategoryFilterChip)

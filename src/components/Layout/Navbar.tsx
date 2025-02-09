@@ -32,6 +32,7 @@ const SCROLL_THRESHOLD = 30
 const Navbar = () => {
   const direction = useScrollDirection(SCROLL_THRESHOLD)
   const isScrollTop = useScrollTop()
+  const pathname = usePathname()
 
   return (
     <nav
@@ -40,40 +41,37 @@ const Navbar = () => {
     >
       <Frame className={style.navigationFrame}>
         <Logo />
-        <Navbar.Menu />
+
+        <Flex as="ul">
+          {MENUS.map((menu, i) => {
+            const isActive = pathname === menu.href
+
+            return (
+              <li
+                key={`menu_${i}`}
+                className={style.menuWrapper}
+                data-active={isActive}
+              >
+                <Link
+                  href={menu.href}
+                  target={menu.isOutlink ? '_blank' : '_self'}
+                  rel="noopener noreferrer"
+                >
+                  <Typo
+                    className={style.menu}
+                    variety="subtitle_2"
+                    color="grey700"
+                  >
+                    {menu.label}
+                  </Typo>
+                </Link>
+              </li>
+            )
+          })}
+        </Flex>
       </Frame>
     </nav>
   )
 }
 
 export default Navbar
-
-Navbar.Menu = React.memo(function Component() {
-  const pathname = usePathname()
-
-  return (
-    <Flex as="ul" align="baseline">
-      {MENUS.map((menu, i) => {
-        const isActive = pathname === menu.href
-
-        return (
-          <li
-            key={`menu_${i}`}
-            className={style.menuWrapper}
-            data-active={isActive}
-          >
-            <Link
-              href={menu.href}
-              target={menu.isOutlink ? '_blank' : '_self'}
-              rel="noopener noreferrer"
-            >
-              <Typo className={style.menu} variety="subtitle_1" color="grey700">
-                {menu.label}
-              </Typo>
-            </Link>
-          </li>
-        )
-      })}
-    </Flex>
-  )
-})

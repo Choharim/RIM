@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react'
 
 import Flex from '@/components/Flex'
 
-import Chip from './Chip'
+import Chip from './CategoryFilterChip'
 import * as style from './index.css'
 
 const CategoryFilter = ({ children }: PropsWithChildren) => {

@@ -82,20 +82,20 @@ export const liRecipe = recipe({
   variants: {
     headerType: {
       h2: {
-        color: COLOR.grey800,
+        color: COLOR.grey700,
         ...FONT.subtitle_2,
       },
       h3: {
         marginLeft: 10,
         paddingLeft: 10,
-        color: COLOR.grey800,
+        color: COLOR.grey700,
         ...FONT.subtitle_2,
       },
       h4: {
         marginLeft: 10,
         paddingLeft: 25,
         color: COLOR.grey600,
-        ...FONT.subtitle_2,
+        ...FONT.subtitle_3,
       },
     },
     highlight: {

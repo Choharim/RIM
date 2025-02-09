@@ -79,7 +79,7 @@ globalStyle(`${base} blockquote`, {
   margin: '20px 0',
   ...FONT.subtitle_1,
   borderLeft: `4px solid ${COLOR.primary400}`,
-  backgroundColor: COLOR.grey50,
+  backgroundColor: COLOR.primary50,
   borderRadius: '4px',
 })
 globalStyle(`${base} blockquote div`, {
@@ -93,14 +93,6 @@ globalStyle(`${base} blockquote code`, {
 globalStyle(`${base} .notion-inline-underscore`, {
   textDecoration: 'none',
   boxShadow: `inset 0 -8px 0 rgba(${convertHEXToRGB(COLOR.primary300)}, 0.7)`,
-})
-
-globalStyle(`${base} .notion-callout`, {
-  backgroundColor: COLOR.white,
-  margin: '15px 0',
-  padding: '15px 20px',
-  border: `2px dashed ${COLOR.primary400}`,
-  borderRadius: '15px',
 })
 
 globalStyle(`${base} .notion-callout ul,${base} .notion-callout ol`, {
@@ -118,7 +110,7 @@ globalStyle(
     ...FONT.body_1,
     fontWeight: 600,
     color: COLOR.grey900,
-    backgroundColor: `rgba(${convertHEXToRGB(COLOR.primary200)}, 0.3)`,
+    backgroundColor: `rgba(${convertHEXToRGB(COLOR.primary300)}, 0.3)`,
   }
 )
 

@@ -19,4 +19,5 @@ export type PostFrontMatter = {
   create_date: CreateDate
   update_date: CreateDate
   published: boolean
+  recommand: boolean
 }

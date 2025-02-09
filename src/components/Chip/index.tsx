@@ -7,13 +7,9 @@ import React, {
 } from 'react'
 import * as style from './style.css'
 import { combineClassName } from '@/styles/mixin'
-import { assignInlineVars } from '@vanilla-extract/dynamic'
+import { Color, Size, Variety } from './shared'
 
-type Variety = 'solid' | 'soft' | 'surface' | 'outline'
-type Size = 's' | 'm' | 'l'
-type Color = 'primary'
-
-export type ChipStyle = {
+type ChipStyle = {
   variety: Variety
   size: Size
   color: Color
@@ -27,20 +23,13 @@ const Chip = (
   { variety, size, color, children, className, ...rest }: Props,
   forwardedRef: ForwardedRef<HTMLSpanElement>
 ) => {
-  const _className = combineClassName(className, style.chip({ variety, size }))
-  const colorVariant = style.COLOR_VARIANT[color]
+  const _className = combineClassName(
+    className,
+    style.chip({ colorVariety: `${color}-${variety}`, size })
+  )
 
   return (
-    <span
-      {...rest}
-      className={_className}
-      ref={forwardedRef}
-      style={assignInlineVars({
-        [style.vars.accent]: colorVariant.accent,
-        [style.vars.accentContrast]: colorVariant.accentContrast,
-        [style.vars.accentHalf]: colorVariant.accentHalf,
-      })}
-    >
+    <span {...rest} className={_className} ref={forwardedRef}>
       {children}
     </span>
   )

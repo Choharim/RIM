@@ -1,3 +1,4 @@
+'use client'
 import React, { ComponentProps, SVGAttributes } from 'react'
 
 import { ICON_COMPONENT, IconType } from './shared'
@@ -8,7 +9,7 @@ interface IconProps
   extends Pick<SVGAttributes<SVGAElement>, 'width' | 'height'>,
     Pick<ComponentProps<'svg'>, 'className' | 'onClick'> {
   type: IconType
-  color: ColorKey
+  color: ColorKey | 'inherit'
 }
 const Icon = React.forwardRef<HTMLDivElement, IconProps>(
   ({ type, width = 18, height, color, ...restProps }, ref) => {
@@ -19,7 +20,7 @@ const Icon = React.forwardRef<HTMLDivElement, IconProps>(
         ref={ref}
         width={width}
         height={height}
-        color={COLOR[color]}
+        color={color === 'inherit' ? 'inherit' : COLOR[color]}
         strokeWidth="2.0"
         {...restProps}
       />

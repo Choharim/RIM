@@ -22,6 +22,7 @@ type ElementTag = Extract<
   | 'time'
   | 'strong'
   | 'em'
+  | 'sub'
 >
 
 export type TypoStyle = {

@@ -11,7 +11,6 @@ import Typo from '../Typo'
 import useScrollDirection from '@/hooks/useScrollDirection'
 import useScrollTop from '@/hooks/useScrollTop'
 import * as style from './navbar.css'
-import { assignInlineVars } from '@vanilla-extract/dynamic'
 import AppFeature from '@/feature/application'
 
 type TextMenu = {
@@ -33,53 +32,46 @@ const SCROLL_THRESHOLD = 30
 const Navbar = () => {
   const direction = useScrollDirection(SCROLL_THRESHOLD)
   const isScrollTop = useScrollTop()
+  const pathname = usePathname()
 
   return (
     <nav
       className={style.navigation}
-      style={assignInlineVars({
-        [style.navigationYVar]:
-          direction === 'down' && !isScrollTop
-            ? style.NAV_Y.hidden
-            : style.NAV_Y.show,
-      })}
+      data-hidden={direction === 'down' && !isScrollTop}
     >
       <Frame className={style.navigationFrame}>
-        <Logo isFold />
-        <Navbar.Menu />
+        <Logo />
+
+        <Flex as="ul">
+          {MENUS.map((menu, i) => {
+            const isActive = pathname === menu.href
+
+            return (
+              <li
+                key={`menu_${i}`}
+                className={style.menuWrapper}
+                data-active={isActive}
+              >
+                <Link
+                  href={menu.href}
+                  target={menu.isOutlink ? '_blank' : '_self'}
+                  rel="noopener noreferrer"
+                >
+                  <Typo
+                    className={style.menu}
+                    variety="subtitle_2"
+                    color="grey700"
+                  >
+                    {menu.label}
+                  </Typo>
+                </Link>
+              </li>
+            )
+          })}
+        </Flex>
       </Frame>
     </nav>
   )
 }
 
 export default Navbar
-
-Navbar.Menu = React.memo(function Component() {
-  const pathname = usePathname()
-
-  return (
-    <Flex as="ul" align="baseline">
-      {MENUS.map((menu, i) => {
-        const isActive = pathname === menu.href
-
-        return (
-          <li
-            key={`menu_${i}`}
-            className={style.menuWrapper}
-            data-active={isActive}
-          >
-            <Link
-              href={menu.href}
-              target={menu.isOutlink ? '_blank' : '_self'}
-              rel="noopener noreferrer"
-            >
-              <Typo className={style.menu} variety="subtitle_1" color="grey700">
-                {menu.label}
-              </Typo>
-            </Link>
-          </li>
-        )
-      })}
-    </Flex>
-  )
-})

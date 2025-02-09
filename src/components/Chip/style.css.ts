@@ -1,23 +1,27 @@
 import FONT from '@/styles/font'
 
-import { ChipStyle } from '.'
 import COLOR from '@/styles/color'
 import { recipe } from '@vanilla-extract/recipes'
 import { CSSProperties } from 'react'
-import { createThemeContract } from '@vanilla-extract/css'
 import { createObjectByFormatter } from '@/shared/_utils'
+import { FontKey } from '@/styles/type'
+import { Color, Size, SIZE_LIST, Variety } from './shared'
 
-const SIZE: Record<ChipStyle['size'], CSSProperties> = {
-  s: { padding: '2px 6px', borderRadius: 8, ...FONT.caption_1 },
-  m: { padding: '2px 8px', borderRadius: 10, ...FONT.subtitle_3 },
-  l: { padding: '4px 10px', borderRadius: 12, ...FONT.subtitle_2 },
+const SIZE: Record<
+  Size,
+  {
+    padding: string
+    radius: number
+    font: FontKey
+  }
+> = {
+  s: { padding: '2px 6px', radius: 8, font: 'caption_1' },
+  m: { padding: '2px 8px', radius: 10, font: 'subtitle_3' },
+  l: { padding: '4px 10px', radius: 12, font: 'subtitle_2' },
 }
 
-type ColorVariant = 'accent' | 'accentHalf' | 'accentContrast'
-export const COLOR_VARIANT: Record<
-  ChipStyle['color'],
-  Record<ColorVariant, string>
-> = {
+type ColorGroup = 'accent' | 'accentHalf' | 'accentContrast'
+const COLOR_GROUP: Record<Color, Record<ColorGroup, string>> = {
   primary: {
     accent: COLOR.primary400,
     accentHalf: COLOR.primary200,
@@ -25,32 +29,27 @@ export const COLOR_VARIANT: Record<
   },
 }
 
-export const vars = createThemeContract({
-  accent: '',
-  accentHalf: '',
-  accentContrast: '',
-})
-
-const VARIANT: Record<
-  ChipStyle['variety'],
+type ColorVariety = `${Color}-${Variety}`
+const COLOR_VARIETY: Record<
+  ColorVariety,
   Partial<Record<'border' | 'color' | 'background', string>>
 > = {
-  solid: {
-    background: vars.accent,
-    color: vars.accentContrast,
+  'primary-solid': {
+    background: COLOR_GROUP.primary.accent,
+    color: COLOR_GROUP.primary.accentContrast,
   },
-  soft: {
-    background: vars.accentContrast,
-    color: vars.accent,
+  'primary-soft': {
+    background: COLOR_GROUP.primary.accentContrast,
+    color: COLOR_GROUP.primary.accent,
   },
-  surface: {
-    border: vars.accentHalf,
-    background: vars.accentContrast,
-    color: vars.accent,
+  'primary-surface': {
+    border: COLOR_GROUP.primary.accentHalf,
+    background: COLOR_GROUP.primary.accentContrast,
+    color: COLOR_GROUP.primary.accent,
   },
-  outline: {
-    border: vars.accent,
-    color: vars.accent,
+  'primary-outline': {
+    border: COLOR_GROUP.primary.accent,
+    color: COLOR_GROUP.primary.accent,
   },
 }
 
@@ -63,10 +62,11 @@ export const chip = recipe({
     },
   },
   variants: {
-    variety: createObjectByFormatter<ChipStyle['variety'], CSSProperties>(
-      ['outline', 'soft', 'solid', 'surface'],
+    colorVariety: createObjectByFormatter<ColorVariety, CSSProperties>(
+      ['primary-outline', 'primary-soft', 'primary-solid', 'primary-surface'],
       (key) => {
-        const variant = VARIANT[key]
+        const variant = COLOR_VARIETY[key]
+
         return {
           color: variant.color,
           backgroundColor: variant.background
@@ -78,6 +78,14 @@ export const chip = recipe({
         }
       }
     ),
-    size: SIZE,
+    size: createObjectByFormatter<Size, CSSProperties>(SIZE_LIST, (size) => {
+      const { padding, radius, font } = SIZE[size]
+
+      return {
+        padding,
+        borderRadius: radius,
+        ...FONT[font],
+      }
+    }),
   },
 })

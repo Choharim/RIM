@@ -32,6 +32,7 @@ class AppFeature {
     blogDetails({ id }) {
       return `/blog/${id}`
     },
+
     category({ category }) {
       return `/category/${category}`
     },

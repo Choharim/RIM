@@ -1,4 +1,3 @@
-// app/sitemap.ts
 import notionAPI from '@/adapter/notion'
 import AppFeature from '@/feature/application'
 

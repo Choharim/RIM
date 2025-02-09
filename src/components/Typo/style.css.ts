@@ -8,6 +8,8 @@ import { DEVICE_BREAK_POINT } from '@/styles/device'
 
 export const typo = recipe({
   base: {
+    all: 'unset',
+    whiteSpace: 'pre-wrap',
     selectors: {
       '&:empty': {
         display: 'none',

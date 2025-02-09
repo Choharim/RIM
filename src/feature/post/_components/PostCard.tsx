@@ -3,7 +3,7 @@ import React, { ComponentProps, PropsWithChildren } from 'react'
 import Typo from '@/components/Typo'
 import Flex from '@/components/Flex'
 
-import * as style from './postCard.css'
+import * as styles from './postCard.css'
 import { PostFrontMatter } from '@/entity/post/type'
 import Link from 'next/link'
 import AppFeature from '@/feature/application'
@@ -17,7 +17,7 @@ const PostCard = ({ children, id }: PropsWithChildren<Props>) => {
       direction="column"
       as="article"
       justify="between"
-      className={style.wrapper}
+      className={styles.wrapper}
     >
       {children}
       <Link
@@ -25,7 +25,7 @@ const PostCard = ({ children, id }: PropsWithChildren<Props>) => {
           name: 'blogDetails',
           pathParams: { id },
         })}
-        className={style.link}
+        className={styles.link}
       />
     </Flex>
   )
@@ -47,7 +47,7 @@ function Title({ children }: PropsWithChildren) {
       variety="title_1"
       color="grey900"
       lineClamp={2}
-      className={style.title}
+      className={styles.title}
     >
       {children}
     </Typo>
@@ -64,7 +64,7 @@ function Desc({ children }: PropsWithChildren) {
 
 function LabelSection({ children }: PropsWithChildren) {
   return (
-    <Flex align="center" gap={'8px'}>
+    <Flex align="center" gap={'8px'} className={styles.labelContainer}>
       {children}
     </Flex>
   )
@@ -80,7 +80,7 @@ function Body({ children }: PropsWithChildren) {
 
 function Footer({ children }: PropsWithChildren) {
   return (
-    <Flex justify="between" align="end" gap={'10px'} className={style.footer}>
+    <Flex justify="between" align="end" gap={'10px'} className={styles.footer}>
       {children}
     </Flex>
   )
@@ -88,7 +88,13 @@ function Footer({ children }: PropsWithChildren) {
 
 function Date({ dateTime }: Pick<ComponentProps<'time'>, 'dateTime'>) {
   return (
-    <Typo as="time" dateTime={dateTime} variety="detail_1" color="grey700">
+    <Typo
+      as="time"
+      dateTime={dateTime}
+      variety="detail_1"
+      color="grey700"
+      className={styles.date}
+    >
       {dateTime}
     </Typo>
   )

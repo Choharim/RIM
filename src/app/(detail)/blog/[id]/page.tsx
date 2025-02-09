@@ -1,8 +1,8 @@
 import notionAPI from '@/adapter/notion'
 import PostEntity from '@/entity/post'
 import { AppPageProps } from '@/feature/application/_types/navigation'
-import PostTemplate from '@/feature/post/_components/PostTemplate'
-import CustomStyleProvider from '@/feature/post/_components/PostTemplate/CustomStyleProvider'
+import PostTemplate from '@/app/(detail)/blog/[id]/_components/PostTemplate'
+import CustomStyleProvider from '@/app/(detail)/blog/[id]/_components/PostTemplate/CustomStyleProvider'
 
 import React from 'react'
 import Renderer from './_components/Renderer'
@@ -12,13 +12,13 @@ import SEOFeature from '@/feature/seo'
 import { notFound } from 'next/navigation'
 
 async function PostDetail({ params: { id } }: AppPageProps<'blogDetails'>) {
-  const frontMatter = await getFrontMatters(id)
+  const frontMatter = await notionAPI.getFrontMatterById(id)
 
   if (!frontMatter) {
     notFound()
   }
 
-  const post = await getPost(id)
+  const post = await notionAPI.getPost(id)
 
   return (
     <>
@@ -57,24 +57,11 @@ export async function generateStaticParams() {
   return paths
 }
 
-async function getFrontMatters(id: string) {
-  const all = await notionAPI.getPublishedPostFrontMatters()
-  const frontMatter = PostEntity.findFrontMatter(all, id)
-
-  return frontMatter
-}
-
-async function getPost(id: string) {
-  const post = await notionAPI.getPost(id)
-
-  return post
-}
-
 export async function generateMetadata({
   params,
 }: AppPageProps<'blogDetails'>): Promise<Metadata> {
   const id = (await params).id
-  const frontMatter = await getFrontMatters(id)
+  const frontMatter = await notionAPI.getFrontMatterById(id)
 
   if (!frontMatter) return {}
 

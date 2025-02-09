@@ -13,6 +13,7 @@ export type AppPageParams = {
   blogDetails: {
     id: string
   }
+  // eslint-disable-next-line @typescript-eslint/ban-types
 }
 
 /**

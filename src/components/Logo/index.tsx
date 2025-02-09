@@ -1,43 +1,44 @@
-import React, { ComponentProps } from 'react'
+import React from 'react'
 import Link from 'next/link'
 
 import Typo from '../Typo'
 import Flex from '../Flex'
 
-import * as style from './style.css'
-import { assignInlineVars } from '@vanilla-extract/dynamic'
+import * as styles from './style.css'
 import AppFeature from '@/feature/application'
 
-interface Props extends ComponentProps<typeof Typo> {
-  isFold: boolean
+const alphabets = AppFeature.BLOG_NAME.fullName.split('')
+const isInitial = (alphabet: string) => {
+  return alphabet.toUpperCase() === alphabet
 }
-const Logo = ({ isFold, ...typoProps }: Props) => {
-  const alphabets = AppFeature.BLOG_NAME.fullName.split('')
 
-  const isInitial = (alphabet: string) => {
-    return alphabet.toUpperCase() === alphabet
-  }
-
+const Logo = () => {
   return (
     <Link href={AppFeature.getAppURI({ name: 'main' })}>
-      <Flex>
+      <Flex align="center">
         {alphabets.map((alphabet, i) => (
           <Typo
             responsive={false}
             key={`${alphabet}_${i}`}
             className={
-              style.wrapper[isInitial(alphabet) ? 'initial' : 'fullname']
+              styles.wrapper[isInitial(alphabet) ? 'initial' : 'fullname']
             }
-            style={assignInlineVars({
-              [style.isFoldVar]: isFold ? 'fold' : '',
-            })}
-            variety={typoProps.variety ?? 'header_3'}
+            variety={'header_3'}
             color="primary400"
-            {...typoProps}
           >
             {alphabet}
           </Typo>
         ))}
+
+        <Typo
+          className={styles.sub}
+          as="sub"
+          variety="subtitle_3"
+          color="grey700"
+          responsive={false}
+        >
+          블로그
+        </Typo>
       </Flex>
     </Link>
   )

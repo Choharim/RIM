@@ -2,7 +2,7 @@ import { PostCategory, PostFrontMatter } from './type'
 
 class PostEntity {
   // published 된 fontMatters
-  public static getPublishedFrontMatters(posts: PostFrontMatter[]) {
+  public static filterPublishedFrontMatters(posts: PostFrontMatter[]) {
     return posts.filter((post) => post.published)
   }
 
@@ -17,6 +17,18 @@ class PostEntity {
     return copiedPosts
   }
 
+  // 특정 category의 frontMatters
+  public static filterFrontMattersByCategory(
+    posts: PostFrontMatter[],
+    category: PostCategory
+  ) {
+    return posts.filter((post) => post.category === category)
+  }
+
+  public static filterRecommandFrontMatters(posts: PostFrontMatter[]) {
+    return posts.filter((post) => post.recommand)
+  }
+
   public static getPostIDs(posts: PostFrontMatter[]) {
     return posts.map((post) => post.id)
   }
@@ -26,13 +38,6 @@ class PostEntity {
     id: string
   ): PostFrontMatter | undefined {
     return posts.find((post) => post.id === id)
-  }
-
-  public static findFrontMattersByCategory(
-    posts: PostFrontMatter[],
-    category: PostCategory
-  ) {
-    return posts.filter((post) => post.category === category)
   }
 
   public static readonly CATEGORY_LIST = [

@@ -6,6 +6,7 @@ export const base = style({
     '&::before': {
       content: '#',
       color: COLOR.primary400,
+      marginRight: 1,
     },
   },
 })

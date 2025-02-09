@@ -1,12 +1,9 @@
 import notionAPI from '@/adapter/notion'
-import { PostCategory } from '@/entity/post/type'
 
-import CardListFrame from '@/app/(list)/category/[category]/_components/CardListFrame'
 import CategoryFilter from '@/feature/post/_components/CategoryFilter'
 
 import PostEntity from '@/entity/post'
 import { AppPageProps } from '@/feature/application/_types/navigation'
-import * as style from '@/app/(list)/category/[category]/_components/cardListFrame.css'
 import { Suspense } from 'react'
 import { Metadata } from 'next'
 import PostFeature from '@/feature/post'
@@ -19,8 +16,10 @@ import SEOFeature from '@/feature/seo'
 async function CategoryPage({
   params: { category },
 }: AppPageProps<'category'>) {
-  const frontMatters = await getFrontMatters(category)
-  const categoryList = await getCategoryList()
+  const categoryList = await notionAPI.getCategories()
+
+  const categorized = await notionAPI.getFrontMattersByCategory(category)
+  const frontMatters = PostEntity.sortFrontMattersByNewest(categorized)
 
   return (
     <>
@@ -46,11 +45,9 @@ async function CategoryPage({
         ))}
       </CategoryFilter>
 
-      <CardListFrame className={style.topGap}>
-        <Suspense>
-          <PostList frontMatters={frontMatters} />
-        </Suspense>
-      </CardListFrame>
+      <Suspense>
+        <PostList frontMatters={frontMatters} />
+      </Suspense>
     </>
   )
 }
@@ -63,20 +60,6 @@ export async function generateStaticParams() {
   return categories.map((category) => ({
     params: { category },
   }))
-}
-
-async function getFrontMatters(category: PostCategory) {
-  const all = await notionAPI.getPublishedPostFrontMatters()
-  const categorized = PostEntity.filterFrontMattersByCategory(all, category)
-  const frontMatters = PostEntity.sortFrontMattersByNewest(categorized)
-
-  return frontMatters
-}
-
-const getCategoryList = async () => {
-  const categoryList = await notionAPI.getCategories()
-
-  return categoryList
 }
 
 export async function generateMetadata({

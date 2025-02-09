@@ -15,12 +15,9 @@ class NotionAPI {
 
   // 모든 FrontMatter을 가져옵니다.
   private async getPostFrontMatters(): Promise<PostFrontMatter[]> {
-    return await fetch(`${this.BASE_URL}/table/${this.NOTION_ID.page.blog}`, {
-      headers: {
-        'Cache-Control': 'no-cache',
-        Pragma: 'no-cache',
-      },
-    }).then((res) => res.json())
+    return await fetch(
+      `${this.BASE_URL}/table/${this.NOTION_ID.page.blog}`
+    ).then((res) => res.json())
   }
 
   // 게시된 모든 FrontMatter을 가져옵니다.

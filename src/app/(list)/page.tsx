@@ -6,7 +6,7 @@ import StructuredData from '@/feature/seo/_components/StructuredData'
 import AppFeature from '@/feature/application'
 import SEOFeature from '@/feature/seo'
 import CategoryFilter from '@/feature/post/_components/CategoryFilter'
-import PostList from './category/[category]/_components/PostList'
+import PostList from './_components/PostList'
 
 async function Page() {
   const categoryList = await notionAPI.getCategories()

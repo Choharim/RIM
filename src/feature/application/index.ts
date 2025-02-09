@@ -21,6 +21,13 @@ class AppFeature {
     domain: 'https://root-in-meaningful.vercel.app',
   }
 
+  private static readonly DOMAIN_REG_EXP =
+    /http[s]*:\/\/[www.]*root-in-meaningful.vercel\.app[/]?/
+
+  static isOutLink(href: string) {
+    return !href.startsWith('/') && !this.DOMAIN_REG_EXP.test(href)
+  }
+
   private static APP_URL: {
     [Name in AppPageName]: keyof AppPagePathParams<Name> extends never
       ? () => string

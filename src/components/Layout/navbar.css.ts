@@ -35,36 +35,46 @@ export const navigationFrame = style({
 })
 
 export const menuWrapper = style({
+  position: 'relative',
+
+  display: 'flex',
+  alignItems: 'center',
+  height: 40,
+
   borderRadius: 4,
+  color: COLOR.grey700,
 
   selectors: {
-    '&:not(:first-of-type)': {
-      marginLeft: 10,
-    },
-
     '&[data-active="true"]': {
       pointerEvents: 'none',
       backgroundColor: COLOR.grey100,
+      color: COLOR.grey800,
     },
 
     '&:hover': {
-      backgroundColor: COLOR.grey50,
+      backgroundColor: COLOR.grey100,
+      color: COLOR.grey800,
     },
   },
 })
 
-export const menu = style({
-  display: 'flex',
-  alignItems: 'center',
-  padding: '3px 8px',
-
-  selectors: {
-    [`${menuWrapper}:hover &`]: {
-      color: COLOR.primary400,
-    },
-
-    [`${menuWrapper}[data-active="true"] &`]: {
-      color: COLOR.primary500,
-    },
-  },
+export const link = style({
+  position: 'absolute',
+  left: 0,
+  top: 0,
+  width: '100%',
+  height: '100%',
 })
+
+const menuContent = style({
+  padding: 8,
+})
+
+export const icon = style([
+  menuContent,
+  {
+    width: 40,
+  },
+])
+
+export const label = style([menuContent])

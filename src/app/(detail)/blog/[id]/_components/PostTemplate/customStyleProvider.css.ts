@@ -92,7 +92,7 @@ globalStyle(`${base} blockquote code`, {
 
 globalStyle(`${base} .notion-inline-underscore`, {
   textDecoration: 'none',
-  boxShadow: `inset 0 -8px 0 rgba(${convertHEXToRGB(COLOR.primary300)}, 0.7)`,
+  boxShadow: `inset 0 -8px 0 rgba(${convertHEXToRGB(COLOR.primary200)}, 0.7)`,
 })
 
 globalStyle(`${base} .notion-callout ul,${base} .notion-callout ol`, {

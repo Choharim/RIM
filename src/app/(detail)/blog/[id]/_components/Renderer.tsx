@@ -1,20 +1,20 @@
 'use client'
 
-import React from 'react'
+import React, { ComponentProps } from 'react'
 import { NotionRenderer } from 'react-notion-x'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
-import Outlink from '@/feature/post/_components/PostTemplate/Outlink'
+import Outlink from '@/app/(detail)/blog/[id]/_components/PostTemplate/Outlink'
+import Callout from './PostTemplate/Callout'
 
 const Code = dynamic(
-  () => import('@/feature/post/_components/PostTemplate/Code'),
+  () => import('@/app/(detail)/blog/[id]/_components/PostTemplate/Code'),
   { ssr: false }
 )
 
 interface Props {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  post: any
+  post: ComponentProps<typeof NotionRenderer>['recordMap']
 }
 function Renderer({ post }: Props) {
   return (
@@ -26,6 +26,7 @@ function Renderer({ post }: Props) {
         nextImage: Image,
         Link: Outlink,
         nextLink: Link,
+        Callout: Callout,
         Collection: () => <></>,
         Equation: () => <></>,
       }}

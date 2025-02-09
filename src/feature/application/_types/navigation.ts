@@ -14,7 +14,6 @@ export type AppPageParams = {
     id: string
   }
   // eslint-disable-next-line @typescript-eslint/ban-types
-  categoryMain: {}
 }
 
 /**

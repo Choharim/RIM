@@ -6,24 +6,25 @@ import { usePathname } from 'next/navigation'
 import Frame from './Frame'
 import Logo from '../Logo'
 import Flex from '../Flex'
-import Typo from '../Typo'
 
 import useScrollDirection from '@/hooks/useScrollDirection'
 import useScrollTop from '@/hooks/useScrollTop'
-import * as style from './navbar.css'
+import * as styles from './navbar.css'
 import AppFeature from '@/feature/application'
+import Icon from '../Icon'
+import { Either } from '@/shared/_types'
+import Typo from '../Typo'
+import { IconType } from '../Icon/shared'
+import { combineClassName } from '@/styles/mixin'
 
 type TextMenu = {
   href: string
-  isOutlink?: boolean
-  label: string
-}
+} & Either<{ iconType: IconType }, { label: string }>
 
 const MENUS: Readonly<Array<TextMenu>> = [
   {
     href: AppFeature.URL.github,
-    isOutlink: true,
-    label: 'Github',
+    iconType: 'GithubMark',
   },
 ]
 
@@ -36,35 +37,47 @@ const Navbar = () => {
 
   return (
     <nav
-      className={style.navigation}
+      className={styles.navigation}
       data-hidden={direction === 'down' && !isScrollTop}
     >
-      <Frame className={style.navigationFrame}>
+      <Frame className={styles.navigationFrame}>
         <Logo />
 
-        <Flex as="ul">
+        <Flex as="ul" align="center" gap={'10px'}>
           {MENUS.map((menu, i) => {
             const isActive = pathname === menu.href
 
             return (
               <li
                 key={`menu_${i}`}
-                className={style.menuWrapper}
+                className={combineClassName(
+                  styles.menuWrapper,
+                  menu.label ? styles.label : ''
+                )}
                 data-active={isActive}
               >
-                <Link
-                  href={menu.href}
-                  target={menu.isOutlink ? '_blank' : '_self'}
-                  rel="noopener noreferrer"
-                >
+                {menu.iconType ? (
+                  <Icon
+                    type={menu.iconType}
+                    color={'inherit'}
+                    className={styles.icon}
+                  />
+                ) : (
                   <Typo
-                    className={style.menu}
                     variety="subtitle_2"
-                    color="grey700"
+                    color={'inherit'}
+                    className={styles.label}
                   >
                     {menu.label}
                   </Typo>
-                </Link>
+                )}
+
+                <Link
+                  href={menu.href}
+                  target={AppFeature.isOutLink(menu.href) ? '_blank' : '_self'}
+                  rel="noopener noreferrer"
+                  className={styles.link}
+                />
               </li>
             )
           })}

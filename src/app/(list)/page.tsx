@@ -5,13 +5,13 @@ import { Metadata } from 'next'
 import StructuredData from '@/feature/seo/_components/StructuredData'
 import AppFeature from '@/feature/application'
 import SEOFeature from '@/feature/seo'
-import IntroCard from './_components/IntroCard'
-import Section from './_components/Section'
-import PostList from './_components/PostList'
-import CardListFrame from './_components/CardListFrame'
+import CategoryFilter from '@/feature/post/_components/CategoryFilter'
+import PostList from './category/[category]/_components/PostList'
 
 async function Page() {
-  const all = await notionAPI.getRecommandPostFrontMatters()
+  const categoryList = await notionAPI.getCategories()
+
+  const all = await notionAPI.getPublishedPostFrontMatters()
   const frontMatters = PostEntity.sortFrontMattersByNewest(all)
 
   return (
@@ -25,18 +25,15 @@ async function Page() {
         })}
       />
 
-      <IntroCard />
+      <CategoryFilter>
+        {categoryList.map((c) => (
+          <CategoryFilter.Chip key={c} category={c} isSeleted={false} />
+        ))}
+      </CategoryFilter>
 
-      <Section
-        title="추천 글 ✨"
-        href={AppFeature.getAppURI({ name: 'categoryMain' })}
-      >
-        <CardListFrame>
-          <Suspense>
-            <PostList frontMatters={frontMatters} />
-          </Suspense>
-        </CardListFrame>
-      </Section>
+      <Suspense>
+        <PostList frontMatters={frontMatters} />
+      </Suspense>
     </>
   )
 }

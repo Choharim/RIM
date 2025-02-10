@@ -95,6 +95,14 @@ globalStyle(`${base} .notion-inline-underscore`, {
   boxShadow: `inset 0 -8px 0 rgba(${convertHEXToRGB(COLOR.primary200)}, 0.7)`,
 })
 
+globalStyle(`${base} .notion-callout`, {
+  backgroundColor: COLOR.white,
+  margin: '15px 0',
+  padding: '15px 20px',
+  border: `2px dashed ${COLOR.primary400}`,
+  borderRadius: '15px',
+})
+
 globalStyle(`${base} .notion-callout ul,${base} .notion-callout ol`, {
   marginTop: 0,
   marginBottom: 0,

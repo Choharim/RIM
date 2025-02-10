@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import Outlink from '@/app/(detail)/blog/[id]/_components/PostTemplate/Outlink'
-import Callout from './PostTemplate/Callout'
 
 const Code = dynamic(
   () => import('@/app/(detail)/blog/[id]/_components/PostTemplate/Code'),
@@ -26,7 +25,6 @@ function Renderer({ post }: Props) {
         nextImage: Image,
         Link: Outlink,
         nextLink: Link,
-        Callout: Callout,
         Collection: () => <></>,
         Equation: () => <></>,
       }}

@@ -1,4 +1,4 @@
-import { getWithoutEmptyField } from './'
+import { getWithoutEmptyField } from '.'
 
 /**
  * @description
@@ -7,7 +7,7 @@ import { getWithoutEmptyField } from './'
  * const paramsObj = { foo: "bar", baz: "bar" };
  * getSearchParamString(paramsObj) // "foo=bar&baz=bar"
  */
-export const getSearchParamString = <
+const getSearchParamString = <
   T extends Record<string, string> | URLSearchParams
 >(
   pageParams: T
@@ -17,3 +17,5 @@ export const getSearchParamString = <
 
   return searchParams.toString()
 }
+
+export default getSearchParamString

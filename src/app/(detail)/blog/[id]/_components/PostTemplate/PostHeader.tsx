@@ -15,25 +15,25 @@ const PostHeader = ({ frontMatter }: Props) => {
   const { title, create_date, category, description, tag } = frontMatter
 
   return (
-    <Flex direction="column" className={style.wrapper} gap="12px">
-      <Typo as="h1" variety="header_1" color="grey900">
-        {title}
-      </Typo>
-
-      <Flex align="center" gap={'12px'}>
+    <Flex direction="column" className={style.wrapper}>
+      <Flex align="center" gap={'10px'}>
         <CategoryLabel size="m">{category}</CategoryLabel>
         {tag.map((t, i) => (
           <CategoryTag size="m" key={`${t}-${i}`}>
             {t}
           </CategoryTag>
         ))}
-        <Typo color="grey400">|</Typo>
-        <Typo as="time" dateTime={create_date} variety="body_2" color="grey700">
+        <Typo color="grey300">|</Typo>
+        <Typo as="time" dateTime={create_date} variety="body_2" color="grey600">
           {create_date}
         </Typo>
       </Flex>
 
-      <Typo as="p" variety="body_1" color="grey800">
+      <Typo as="h1" variety="header_1" color="grey900" className={style.header}>
+        {title}
+      </Typo>
+
+      <Typo as="p" variety="body_1" color="grey700">
         {description}
       </Typo>
     </Flex>

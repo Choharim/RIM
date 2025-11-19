@@ -26,6 +26,7 @@ async function Page() {
       />
 
       <CategoryFilter>
+        <CategoryFilter.Chip isSeleted={true}>전체</CategoryFilter.Chip>
         {categoryList.map((c) => (
           <CategoryFilter.Chip key={c} category={c} isSeleted={false} />
         ))}

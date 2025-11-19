@@ -52,7 +52,7 @@ const CategoryFilterChip = (
         {...props}
         size="l"
         color="primary"
-        variety={isSeleted ? 'solid' : 'surface'}
+        variety={isSeleted ? 'surface' : 'soft'}
         ref={forwardedRef}
       >
         {category ? PostFeature.getCategoryName(category) : children}

@@ -19,7 +19,7 @@ function CategoryTag({ children: tag, size }: Props) {
       responsive={false}
       as="span"
       variety={size === 's' ? 'detail_1' : 'body_2'}
-      color="grey700"
+      color="grey600"
       className={style.base}
     >
       {PostFeature.getTagName(tag)}

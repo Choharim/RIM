@@ -4,11 +4,14 @@ import { style } from '@vanilla-extract/css'
 export const wrapper = style([
   {
     position: 'relative',
-    padding: '10px 0',
+    padding: '16px',
     minHeight: 100,
     cursor: 'pointer',
 
     transition: 'box-shadow 300ms ease-in-out, transform 300ms ease-in-out',
+
+    borderRadius: 16,
+    boxShadow: `0 2px 8px 0 rgba(0, 0, 0, 0.08)`,
 
     ':hover': {
       transform: 'translateY(-4px)',
@@ -24,9 +27,7 @@ export const link = style({
   height: '100%',
 })
 
-export const labelContainer = style({
-  marginBottom: 4,
-})
+export const labelContainer = style({})
 
 export const title = style({
   transition: 'color 0.2s ease-in-out',
@@ -39,9 +40,10 @@ export const title = style({
 })
 
 export const footer = style({
-  marginTop: 20,
+  marginTop: 24,
 })
 
 export const date = style({
   margin: '0 0 0 auto',
+  alignSelf: 'end',
 })

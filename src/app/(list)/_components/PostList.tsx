@@ -23,27 +23,27 @@ function PostList({ frontMatters }: Props) {
   }
 
   return (
-    <Flex direction="column">
+    <Flex direction="column" gap={'24px'}>
       {paginatedPosts.map((post) => {
         const { id, title, description, create_date, category, tag } = post
 
         return (
           <PostCard key={id} id={id}>
-            <PostCard.LabelSection>
-              <CategoryLabel size="s">{category}</CategoryLabel>
-              {tag.map((t, i) => (
-                <CategoryTag size="s" key={`${t}-${i}`}>
-                  {t}
-                </CategoryTag>
-              ))}
-            </PostCard.LabelSection>
-
             <PostCard.Body>
               <PostCard.Title>{title}</PostCard.Title>
               <PostCard.Desc>{description}</PostCard.Desc>
             </PostCard.Body>
 
             <PostCard.Footer>
+              <PostCard.LabelSection>
+                <CategoryLabel size="s">{category}</CategoryLabel>
+                {tag.map((t, i) => (
+                  <CategoryTag size="s" key={`${t}-${i}`}>
+                    {t}
+                  </CategoryTag>
+                ))}
+              </PostCard.LabelSection>
+
               <PostCard.Date dateTime={create_date} />
             </PostCard.Footer>
           </PostCard>

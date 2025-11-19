@@ -15,9 +15,9 @@ const SIZE: Record<
     font: FontKey
   }
 > = {
-  s: { padding: '2px 6px', radius: 8, font: 'caption_1' },
-  m: { padding: '2px 8px', radius: 10, font: 'subtitle_3' },
-  l: { padding: '4px 10px', radius: 12, font: 'subtitle_2' },
+  s: { padding: '1px 8px', radius: 14, font: 'caption_2' },
+  m: { padding: '2px 10px', radius: 16, font: 'subtitle_3' },
+  l: { padding: '4px 12px', radius: 18, font: 'subtitle_2' },
 }
 
 type ColorGroup = 'accent' | 'accentHalf' | 'accentContrast'

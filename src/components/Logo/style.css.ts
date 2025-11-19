@@ -20,7 +20,7 @@ export const wrapper = styleVariants({
     background: `linear-gradient(-225deg, ${COLOR.primary300} 0%, ${COLOR.primary400} 30%, #fbc8d4 100%)`,
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
-    animation: `${accordion} 3s ease-in-out 0.8s forwards`,
+    animation: `${accordion} 4s ease-in-out 1s forwards`,
   },
 })
 
@@ -34,7 +34,7 @@ const fadeIn = keyframes({
 })
 
 export const sub = style({
-  margin: '0 0 6px 4px',
+  margin: '0 0 4px 6px',
   alignSelf: 'end',
   whiteSpace: 'nowrap',
   animation: `${fadeIn} 0.3s ease-in-out 3.8s backwards`,

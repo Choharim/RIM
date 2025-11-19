@@ -23,7 +23,7 @@ function PostList({ frontMatters }: Props) {
   }
 
   return (
-    <Flex direction="column" gap={'12px'}>
+    <Flex direction="column" gap={'24px'}>
       {paginatedPosts.map((post) => {
         const { id, title, description, create_date, category, tag } = post
 

@@ -23,7 +23,7 @@ const Logo = () => {
             className={
               styles.wrapper[isInitial(alphabet) ? 'initial' : 'fullname']
             }
-            variety={'header_3'}
+            variety="header_2"
             color="primary400"
           >
             {alphabet}
@@ -34,7 +34,7 @@ const Logo = () => {
           className={styles.sub}
           as="sub"
           variety="subtitle_3"
-          color="grey700"
+          color="grey500"
           responsive={false}
         >
           블로그

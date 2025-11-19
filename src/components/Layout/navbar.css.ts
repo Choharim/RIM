@@ -13,7 +13,7 @@ export const navigation = style({
   height: NAVBAR_HEIGHT,
   backgroundColor: `rgb(${convertHEXToRGB(COLOR.white)}, 0.5)`,
   backdropFilter: 'saturate(180%) blur(5px)',
-  borderBottom: `1px solid ${COLOR.grey200}`,
+  borderBottom: `1px solid ${COLOR.grey100}`,
   zIndex: Z_INDEX.nav,
   display: 'block',
   transition: 'transform 0.2s',

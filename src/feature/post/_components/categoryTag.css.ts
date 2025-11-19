@@ -5,7 +5,7 @@ export const base = style({
   selectors: {
     '&::before': {
       content: '#',
-      color: COLOR.primary400,
+      color: COLOR.primary500,
       marginRight: 1,
     },
   },

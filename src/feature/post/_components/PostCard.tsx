@@ -91,8 +91,8 @@ function Date({ dateTime }: Pick<ComponentProps<'time'>, 'dateTime'>) {
     <Typo
       as="time"
       dateTime={dateTime}
-      variety="detail_1"
-      color="grey700"
+      variety="detail_2"
+      color="grey600"
       className={styles.date}
     >
       {dateTime}

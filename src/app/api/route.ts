@@ -12,11 +12,11 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    revalidatePath('/(list)', 'layout')
+    revalidatePath('/', 'layout')
 
     const id = searchParams.get('id')
     if (id) {
-      revalidatePath(`/(detail)/blog/${id}`)
+      revalidatePath(`/blog/${id}`)
     }
 
     return new Response('revalidated', {

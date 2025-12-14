@@ -1,23 +1,21 @@
 import PostEntity from '@/entity/post'
 import { PostCategory, PostFrontMatter } from '@/entity/post/type'
+import fetchInstance from '@choharim/rim-fetch'
 import { NotionAPI as NotionClient } from 'notion-client'
 
 const notionClient = new NotionClient()
 
+const httpClient = fetchInstance.create({
+  baseURL: 'https://notion-api.splitbee.io/v1',
+})
+
 class NotionAPI {
-  private NOTION_ID = {
-    page: {
-      blog: '51e8461a3f77425aac9bf1d8ccac7720',
-    },
-  } as const
-
-  private BASE_URL = 'https://notion-api.splitbee.io/v1'
-
   // 모든 FrontMatter을 가져옵니다.
   private async getPostFrontMatters(): Promise<PostFrontMatter[]> {
-    return await fetch(
-      `${this.BASE_URL}/table/${this.NOTION_ID.page.blog}`
-    ).then((res) => res.json())
+    const response = await httpClient.get(
+      `/table/${process.env.NEXT_PUBLIC_NOTION_BLOG_ID}`
+    )
+    return response.data
   }
 
   // 게시된 모든 FrontMatter을 가져옵니다.
@@ -60,7 +58,9 @@ class NotionAPI {
   }
 
   private async getTable() {
-    return await notionClient.getPage(this.NOTION_ID.page.blog)
+    return await notionClient.getPage(
+      process.env.NEXT_PUBLIC_NOTION_BLOG_ID as string
+    )
   }
 
   private async getFilters() {

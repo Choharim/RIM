@@ -13,6 +13,7 @@
   "dependencies": {
     "@babel/core": "^7.0.0",
     "@choharim/rim-fetch": "1.0.1",
+    "@notionhq/client": "^5.20.0",
     "@svgr/webpack": "^6.5.1",
     "@vanilla-extract/css": "^1.15.1",
     "@vanilla-extract/dynamic": "^2.1.0",

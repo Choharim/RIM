@@ -20,6 +20,9 @@ const Mermaid = ({ chart }: Props) => {
 
   useEffect(() => {
     let cancelled = false
+    // chart가 바뀌어 재시도할 때 이전 실패 상태를 초기화한다. (초기화하지 않으면
+    // fallback 상태에 갇혀 div가 렌더되지 않아 다이어그램을 다시 그릴 수 없다)
+    setFailed(false)
 
     const render = async () => {
       try {
@@ -27,9 +30,9 @@ const Mermaid = ({ chart }: Props) => {
         mermaid.initialize({
           startOnLoad: false,
           theme: 'neutral',
-          // 블로그 본문은 작성자 소유 콘텐츠이므로 <br> 등 줄바꿈 라벨 렌더를 허용
-          securityLevel: 'loose',
-          flowchart: { htmlLabels: true, useMaxWidth: true },
+          // strict는 라벨 텍스트를 DOMPurify로 정제(XSS 방어)하며, <br> 줄바꿈은 그대로 유지된다.
+          securityLevel: 'strict',
+          flowchart: { useMaxWidth: true },
         })
 
         const { svg } = await mermaid.render(id, chart)

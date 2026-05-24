@@ -125,3 +125,13 @@ globalStyle(
 globalStyle(`${base} .notion-viewport:empty`, {
   display: 'none',
 })
+
+globalStyle(`${base} .notion-asset-wrapper-video > div`, {
+  width: '100% !important',
+  height: 'auto !important',
+  maxWidth: '100%',
+})
+
+globalStyle(`${base} .notion-asset-wrapper-video video`, {
+  maxWidth: '100%',
+})
